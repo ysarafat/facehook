@@ -9,7 +9,7 @@ export default function Bio() {
   const { state, dispatch } = useProfile();
   const [bio, setBio] = useState(state?.user?.bio);
   const [editMood, setEditMood] = useState(false);
-  console.log(state?.user);
+
   const { api } = useAxios();
 
   const handleBioEdit = async () => {
@@ -27,7 +27,10 @@ export default function Bio() {
         setEditMood(false);
       }
     } catch (error) {
-      dispatch({ type: actions.profile.DATA_FETCH_ERROR, error });
+      dispatch({
+        type: actions.profile.DATA_FETCH_ERROR,
+        error: error.message,
+      });
     }
   };
 

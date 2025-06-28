@@ -26,7 +26,7 @@ export default function LoginForm() {
         if (token) {
           const authToken = token.token;
           const refreshToken = token.refreshToken;
-          console.log("Auth Token:", authToken);
+
           setAuth({ user, authToken, refreshToken });
           navigate("/");
         }
