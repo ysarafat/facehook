@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import AuthIllustration from "../assets/images/auth_illustration.png";
+import LoginForm from "../components/auth/LoginForm";
 
 export default function LoginPage() {
   return (
@@ -20,15 +22,16 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="card">
+            <LoginForm />
             <div class="py-4 lg:py-6">
               <p class="text-center text-xs text-gray-600/95 lg:text-sm">
-                Don't have account?
-                <a
+                Don't have account?{" "}
+                <Link
                   class="text-white transition-all hover:text-lwsGreen hover:underline"
-                  href="/registration.html"
+                  to="/register"
                 >
                   Create New
-                </a>
+                </Link>
               </p>
             </div>
           </div>
