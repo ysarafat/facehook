@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -6,17 +7,38 @@ import Field from "../common/Field";
 export default function LoginForm() {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
-  const submitForm = (data) => {
-    console.log(data);
-    const user = { ...data };
-    setAuth({ user });
-    navigate("/");
+
+  const submitForm = async (data) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`,
+        data
+      );
+      if (response.status === 200) {
+        const { token, user } = response.data;
+        if (token) {
+          const authToken = token.token;
+          const refreshToken = token.refreshToken;
+          console.log("Auth Token:", authToken);
+          setAuth({ user, authToken, refreshToken });
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      setError("root.random", {
+        type: "random",
+        message: error.response?.data?.message || "Login failed!",
+      });
+    }
   };
+
   return (
     <form
       className="border-b border-[#3F3F3F] pb-10 lg:pb-[60px]"
@@ -50,6 +72,11 @@ export default function LoginForm() {
           id="password"
         />
       </Field>
+      {errors.root?.random && (
+        <p className="text-red-500 text-sm my-2">
+          {errors.root.random.message}
+        </p>
+      )}
       <Field>
         <button
           className="auth-input bg-lwsGreen font-bold  text-deepDark transition-all hover:opacity-90"

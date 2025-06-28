@@ -7,12 +7,14 @@ export default function PrivateRoutes() {
   return (
     <>
       {auth.user ? (
-        <main>
-          <div className="container">
-            <Header />
-            <Outlet />
-          </div>
-        </main>
+        <>
+          <Header />
+          <main>
+            <div className="container">
+              <Outlet />
+            </div>
+          </main>
+        </>
       ) : (
         <Navigate to="/login" />
       )}
