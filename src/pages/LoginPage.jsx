@@ -23,7 +23,7 @@ export default function LoginPage() {
               </p>
             </div>
           </div>
-          <div classNameName="card">
+          <div className="card">
             <LoginForm />
             <div className="py-4 lg:py-6">
               <p className="text-center text-xs text-gray-600/95 lg:text-sm">
