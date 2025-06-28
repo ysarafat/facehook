@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Field from "../common/Field";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -9,6 +11,7 @@ export default function LoginForm() {
   } = useForm();
   const submitForm = (data) => {
     console.log(data);
+    navigate("/");
   };
   return (
     <form
