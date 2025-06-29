@@ -44,6 +44,7 @@ export default function Bio() {
         ) : (
           <textarea
             value={bio}
+            defaultValue={state?.user?.bio}
             rows={4}
             cols={55}
             onChange={(e) => setBio(e.target.value)}
