@@ -19,7 +19,7 @@ export default function PostAction({ post, commentCount }) {
         setLiked(true);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
